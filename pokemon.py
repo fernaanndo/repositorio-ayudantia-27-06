@@ -40,22 +40,15 @@ def ingresar_opcion():
             print("Debe ingresar valores enteros")
 
 
-def existe_entrenador(entrenador):
-    for valor in pokemones.values():
-        if valor[0].strip().lower() == entrenador.strip().lower():
-            return True
-    return False
 
 
 def pokemon_entrenador(entrenador):
-    if existe_entrenador(entrenador) == True:
-        cantidad = 0
-        for clave, valor in pokemones.items():
-            if valor[0].strip().lower() == entrenador.strip().lower():
-                cantidad+=registro[clave][1]
-        print(f"La cantidad de pokemones del entrenador {entrenador} es: {cantidad}")
-    else:
-        print("No existe ese entrenador")
+    cantidad = 0
+    for clave, valor in pokemones.items():
+        if valor[0].strip().lower() == entrenador.strip().lower():
+            cantidad+=registro[clave][1]
+    print(f"El total de Pokemon es: {cantidad}")
+   
 
 
 
@@ -66,8 +59,18 @@ def busqueda_poder(p_min, p_max):
             entrenador = pokemones[clave][0]
             lista.append(entrenador + "--" + clave)
     lista.sort()
-    print(lista)
+    if len(lista) > 0:
+        print(f"Los Pokemon en ese rango de poder son: {lista}")
+    else:
+        print("No hay pokemon en ese rango de poder")
 
+
+def actualizar_poder(codigo, p):
+    if codigo not in registro:
+        return False 
+    else:
+        registro[codigo][0] = p
+        return True
 
 
 
@@ -89,6 +92,30 @@ def ejecutar_software():
                     print("Debe ingresar valores enteros!")
             
             busqueda_poder(p_min, p_max)
+        elif opcion == 3:
+            while True:
+                codigo = input("Ingrese el codigo: ")
+                while True:
+                    try:
+                        poder = int(input("Ingrese el nuevo poder: "))
+                        break
+                    except ValueError:
+                        print("Debe ingresar un valor entero")
+                
+                if actualizar_poder(codigo, poder) == True:
+                    print("Poder actualizado")
+                else:
+                    print("El pokemon no existe!!")
+                
+                respuesta = input("Desea actualizar otro poder?: ").strip().lower()
+                if respuesta != "si":
+                    break
+        elif opcion == 4:
+            print("Saliendo del programa..")
+            break
+        else:
+            print("Debe ingresar una opcion valida")
+            
         
 
 

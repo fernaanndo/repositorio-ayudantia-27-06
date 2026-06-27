@@ -22,5 +22,8 @@ registro = {
     # 'MAG129': [310, 0],
 }
 
-for clave, valor in registro.items():
-    print(pokemones[clave][0])
+
+if "UWADWAD" in registro:
+    print("Existe")
+else:
+    print("No existe")
